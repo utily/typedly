@@ -1,3 +1,3 @@
 export * from "./Array"
 export * from "./Object"
-export type BLABLA = "dwadw"
+export declare type BLABLA = "dwadw"

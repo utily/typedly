@@ -1,1 +1,1 @@
-export type ArrayLength = number
+export declare type ArrayLength = number

@@ -1,2 +1,2 @@
-export type ObjectSize = number
-export type ObjectSize2 = number
+export declare type ObjectSize = number
+export declare type ObjectSize2 = number
