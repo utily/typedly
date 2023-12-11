@@ -24,10 +24,12 @@
 				"types/*"
 			]
 		},
-		"types": ["jest"]
+		"types": [
+			"jest"
+		]
 	},
 	"files": [
-		"index.ts"
+		"index.d.ts"
 	],
 	"typeAcquisition": {
 		"enable": true
