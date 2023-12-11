@@ -11,6 +11,7 @@
 		"types": []
 	},
 	"files": [
-		"index.d.ts",
+		"index.ts",
+		"global.ts"
 	]
 }

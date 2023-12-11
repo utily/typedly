@@ -1,4 +1,3 @@
-import "./DistributiveOmit"
 /**
  * make sure to export new types in both this file and in ./typely.ts
  */
