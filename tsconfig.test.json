@@ -25,11 +25,11 @@
 			]
 		},
 		"types": [
-			"jest"
+			"jest",
 		]
 	},
 	"files": [
-		"index.d.ts"
+		"index.d.ts",
 	],
 	"typeAcquisition": {
 		"enable": true
