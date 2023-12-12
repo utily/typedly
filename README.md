@@ -7,16 +7,16 @@ The types in this library can accessed in one of the following methods:
   // index.ts
   import { typely } from "typely"
 
-  type MyUnion = {a: string, common: boolean} | { b: string, common: boolean}
+  type MyUnion = { a: string, common: boolean } | { b: string, common: boolean }
   export type Usage = typely.DistributiveOmit<MyUnion, "common">
   ```
 
 * Direct import:
   ```ts
   // index.ts
-  import { DistributiveOmit } from "typely/DistributiveOmit"
+  import { DistributiveOmit } from "typely/dist/DistributiveOmit"
 
-  type MyUnion = {a: string, common: boolean} | { b: string, common: boolean}
+  type MyUnion = { a: string, common: boolean } | { b: string, common: boolean }
   export type Usage = DistributiveOmit<MyUnion, "common">
   ```
 * Injecting the types globally using `tsconfig.json`:
@@ -28,6 +28,6 @@ The types in this library can accessed in one of the following methods:
   ```
   ```ts
   // index.ts
-  type MyUnion = {a: string, common: boolean} | { b: string, common: boolean}
+  type MyUnion = { a: string, common: boolean } | { b: string, common: boolean }
   export type Usage = DistributiveOmit<MyUnion, "common">
   ```
