@@ -14,7 +14,7 @@ The types in this library can accessed in one of the following methods:
 * Direct import:
   ```ts
   // index.ts
-  import { DistributiveOmit } from "typely/dist/DistributiveOmit"
+  import { DistributiveOmit } from "typely/dist/typely"
 
   type MyUnion = { a: string, common: boolean } | { b: string, common: boolean }
   export type Usage = DistributiveOmit<MyUnion, "common">
