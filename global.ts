@@ -1,5 +1,5 @@
 /**
- * make sure to export new types in this file and./typely.ts
+ * make sure to export new types in this file and ./typely.ts
  */
 import * as Function from "./Function"
 import * as Object from "./Object"
