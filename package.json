@@ -10,9 +10,8 @@
 	},
 	"homepage": "https://github.com/utily",
 	"private": false,
-	"typings": "dist/index.d.ts",
 	"type": "module",
-	"types": "index.d.ts",
+	"types": "dist/index.d.ts",
 	"git": {
 		"tagName": "v${version}"
 	},
