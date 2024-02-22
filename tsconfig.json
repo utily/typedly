@@ -4,12 +4,14 @@
 		"declaration": true,
 		"sourceMap": true,
 		"sourceRoot": "../",
-		"outDir": "dist",
 		"baseUrl": ".",
-		"allowSyntheticDefaultImports":true,
+		"allowSyntheticDefaultImports": true,
+		"emitDeclarationOnly": true,
+		"declarationDir": "dist",
 		"types": []
 	},
 	"files": [
 		"index.ts",
+		"global.ts"
 	]
 }
