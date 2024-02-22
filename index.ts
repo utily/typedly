@@ -1,1 +1,1 @@
-export * as typely from "./typely"
+export * as typedly from "./typedly"

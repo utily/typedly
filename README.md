@@ -1,20 +1,20 @@
-# Typely
+# Typedly
 
 ## Usage / Configuration
 The types in this library can accessed in one of the following methods:
 * Namespace import:
   ```ts
   // index.ts
-  import { typely } from "typely"
+  import { typedly } from "typedly"
 
   type MyUnion = { a: string, common: boolean } | { b: string, common: boolean }
-  export type Usage = typely.DistributiveOmit<MyUnion, "common">
+  export type Usage = typedly.DistributiveOmit<MyUnion, "common">
   ```
 
 * Direct import:
   ```ts
   // index.ts
-  import { DistributiveOmit } from "typely/dist/typely"
+  import { DistributiveOmit } from "typedly/dist/typedly"
 
   type MyUnion = { a: string, common: boolean } | { b: string, common: boolean }
   export type Usage = DistributiveOmit<MyUnion, "common">
@@ -23,7 +23,7 @@ The types in this library can accessed in one of the following methods:
   ```json
   // tsconfig.json
   {
-  	"types": ["typely/dist/global.d.ts"]
+  	"types": ["typedly/dist/global.d.ts"]
   }
   ```
   ```ts
