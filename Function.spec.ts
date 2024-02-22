@@ -17,4 +17,28 @@ describe("Function", () => {
 		}
 		expect(bar("a", 1)).toEqual("a1")
 	})
+	it("ProtectedConstructorParameters (abstract class)", () => {
+		abstract class Base {
+			constructor(protected foo: string) {}
+		}
+		class Implementation extends Base {
+			constructor(...parameters: typedly.ProtectedConstructorParameters<typeof Base>) {
+				super(...parameters)
+			}
+		}
+		const instance = new Implementation("hello")
+		expect(instance instanceof Implementation).toEqual(true)
+	})
+	it("ProtectedConstructorParameters (protected constructor)", () => {
+		class Base {
+			protected constructor(foo: string) {}
+		}
+		class Implementation extends Base {
+			constructor(...parameters: typedly.ProtectedConstructorParameters<typeof Base>) {
+				super(...parameters)
+			}
+		}
+		const instance = new Implementation("hello")
+		expect(instance instanceof Implementation).toEqual(true)
+	})
 })
