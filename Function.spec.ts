@@ -8,7 +8,7 @@ describe("Function", () => {
 			const global: Return<typeof work> = 1
 			return namespace + global
 		}
-		expect(work()).toEqual(1)
+		expect(work()).toEqual(2)
 	})
 	it("Parameter", () => {
 		function foo(_: string, __: number): boolean {
