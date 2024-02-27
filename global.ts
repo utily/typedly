@@ -6,7 +6,7 @@ import * as Object from "./Object"
 
 declare global {
 	type DistributiveOmit<T, K extends keyof any> = Object.DistributiveOmit<T, K>
-	type Return<T extends (parameters: unknown[]) => unknown> = Function.Return<T>
-	type Parameter<T extends (...parameters: unknown[]) => unknown, N extends number> = Function.Parameter<T, N>
-	type ProtectedConstructorParameters<T> = ConstructorParameters<(new (...args: any) => { [x: string]: any }) & T>
+	type Return<T extends (...parameters: any[]) => any> = Function.Return<T>
+	type Parameter<T extends (...parameters: any[]) => any, N extends number> = Function.Parameter<T, N>
+	type ProtectedConstructorParameters<T> = Function.ProtectedConstructorParameters<T>
 }
