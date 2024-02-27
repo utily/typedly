@@ -1,3 +1,4 @@
+import "./global"
 import { typedly } from "./index"
 
 describe("Object", () => {
@@ -5,11 +6,15 @@ describe("Object", () => {
 		type A = { a: string; common: number }
 		type B = { b: boolean; common: number }
 		type Union = A | B
-		type CommonOmitted = typedly.DistributiveOmit<Union, "common">
+		type CommonOmittedNamespace = typedly.DistributiveOmit<Union, "common">
+		type CommonOmittedGlobal = DistributiveOmit<Union, "common">
 
-		const result: CommonOmitted = {
-			a: "hello world",
+		const namespace: CommonOmittedNamespace = {
+			a: "hello",
 		}
-		expect(result.a).toEqual("hello world")
+		const global: CommonOmittedGlobal = {
+			a: "world",
+		}
+		expect(`${namespace.a} ${global.a}`).toEqual("hello world")
 	})
 })
