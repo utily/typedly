@@ -1,19 +1,28 @@
+import "./global"
 import { typedly } from "./index"
 
 describe("Function", () => {
 	it("Return", () => {
-		function work(): number {
-			const result: typedly.Function.Return<typeof work> = 1
-			return result
-		}
-		expect(work()).toEqual(1)
+		type Arguments = [() => number]
+		type Result<T> = typedly.Function.Return<Arguments[0]> extends T ? true : false
+		const match: typedly.Function.Return<Arguments[0]> extends Return<Arguments[0]> ? true : false = true
+		const truthy: Result<number> = true
+		const falsy: Result<string> = false
+		expect(truthy).toEqual(true)
+		expect(falsy).toEqual(false)
+		expect(match).toEqual(true)
 	})
 	it("Parameter", () => {
-		type foo = (string: string, number: number) => boolean
-		function bar(a: typedly.Function.Parameter<foo, 0>, b: typedly.Function.Parameter<foo, 1>): string {
-			return a + b.toString(10)
-		}
-		expect(bar("a", 1)).toEqual("a1")
+		type Arguments = [(foo: number) => void, 0]
+		type Result<T> = typedly.Function.Parameter<Arguments[0], Arguments[1]> extends T ? true : false
+		const match: typedly.Function.Parameter<Arguments[0], Arguments[1]> extends Parameter<Arguments[0], Arguments[1]>
+			? true
+			: false = true
+		const truthy: Result<number> = true
+		const falsy: Result<string> = false
+		expect(truthy).toEqual(true)
+		expect(falsy).toEqual(false)
+		expect(match).toEqual(true)
 	})
 	it("ProtectedConstructorParameters (abstract class)", () => {
 		abstract class Base {

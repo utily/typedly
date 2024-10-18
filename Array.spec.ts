@@ -2,7 +2,7 @@ import { typedly } from "./index"
 
 describe("Array", () => {
 	it("Union", () => {
-		type UnionArray = typedly.Array.Union<"foo" | "bar" | "baz">
+		type UnionArray = typedly.Array.UnionValues<"foo" | "bar" | "baz">
 		const array: UnionArray = ["foo", "bar", "baz"]
 		expect(array).toEqual(["foo", "bar", "baz"])
 	})

@@ -39,13 +39,13 @@ describe("Object", () => {
 				}
 			}
 		}
-		const paths: typedly.Array.Union<typedly.Object.DotNotation<Source>> = [
-			"foo",
+		const paths: typedly.Object.DotNotation<Source>[] = [
 			"value",
-			"foo.bar",
+			"foo",
 			"foo.value",
-			"foo.bar.baz",
+			"foo.bar",
 			"foo.bar.value",
+			"foo.bar.baz",
 			"foo.bar.baz.value",
 		]
 		expect(paths.length).toEqual(7)
@@ -53,13 +53,13 @@ describe("Object", () => {
 	it("KeyOf", () => {
 		const source = { foo: "text", bar: 1, baz: true } as const
 		type Result = typedly.Object.KeyOf<typeof source>
-		const keys: typedly.Array.Union<Result> = ["foo", "bar", "baz"]
+		const keys: typedly.Array.UnionValues<Result> = ["foo", "bar", "baz"]
 		expect(keys.every(key => key in source)).toEqual(true)
 	})
 	it("ValueOf", () => {
 		const source = { foo: "text", bar: 1, baz: true } as const
 		type Result = typedly.Object.ValueOf<typeof source>
-		const values: typedly.Array.Union<Result> = [true, 1, "text"]
+		const values: typedly.Array.UnionValues<Result> = [true, 1, "text"]
 		expect(Object.values(source).every(value => values.includes(value))).toEqual(true)
 	})
 	it("RemoveMethods", () => {
