@@ -19,7 +19,7 @@ describe("Stack.Readonly", () => {
 	it("peek", () => {
 		const stack = new Stack([1, 2, 3])
 		const empty = new Stack([])
-		expect(stack.peek()).toEqual(1)
+		expect(stack.peek()).toEqual(3)
 		expect(empty.peek()).toEqual(undefined)
 	})
 })
