@@ -4,6 +4,7 @@ import { Function as typedlyFunction } from "./Function"
 import { IterableWeakMap as typedlyIterableWeakMap } from "./IterableWeakMap"
 import { IterableWeakSet as typedlyIterableWeakSet } from "./IterableWeakSet"
 import { TypedlyObject as typedlyObject } from "./Object"
+import { Promise as typedlyPromise } from "./Promise"
 import { Stack as typedlyStack } from "./Stack"
 import { TypedlyString as typedlyString } from "./String"
 import { Vector as typedlyVector } from "./Vector"
@@ -18,4 +19,5 @@ export namespace typedly {
 	export import Stack = typedlyStack
 	export import String = typedlyString
 	export import Vector = typedlyVector
+	export import Promise = typedlyPromise
 }
