@@ -6,7 +6,6 @@
 		"sourceRoot": "../",
 		"baseUrl": ".",
 		"allowSyntheticDefaultImports": true,
-		"emitDeclarationOnly": true,
 		"declarationDir": "dist",
 	},
 	"files": [
