@@ -1,9 +1,9 @@
 {
 	"compilerOptions": {
-		"target": "es2021",
-		"module": "es2020",
+		"target": "ES2021",
+		"module": "ESNext",
 		"lib": [
-			"es2021",
+			"ES2023",
 			"webworker"
 		],
 		"allowJs": true,
@@ -25,11 +25,15 @@
 			]
 		},
 		"types": [
-			"jest"
+			"jest",
+			"@types/jest",
 		]
 	},
+	"include": [
+		"**/*.spec.ts",
+	],
 	"files": [
-		"index.d.ts"
+		"index.ts"
 	],
 	"typeAcquisition": {
 		"enable": true

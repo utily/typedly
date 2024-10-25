@@ -3,28 +3,33 @@ import { typedly } from "./index"
 
 describe("Function", () => {
 	it("Return", () => {
-		function work(): number {
-			const namespace: typedly.Return<typeof work> = 1
-			const global: Return<typeof work> = 1
-			return namespace + global
-		}
-		expect(work()).toEqual(2)
+		type Arguments = [() => number]
+		type Result<T> = typedly.Function.Return<Arguments[0]> extends T ? true : false
+		const match: typedly.Function.Return<Arguments[0]> extends Return<Arguments[0]> ? true : false = true
+		const truthy: Result<number> = true
+		const falsy: Result<string> = false
+		expect(truthy).toEqual(true)
+		expect(falsy).toEqual(false)
+		expect(match).toEqual(true)
 	})
 	it("Parameter", () => {
-		function foo(_: string, __: number): boolean {
-			return true
-		}
-		function bar(a: typedly.Parameter<typeof foo, 0>, b: Parameter<typeof foo, 1>): string {
-			return a + b.toString(10)
-		}
-		expect(bar("a", 1)).toEqual("a1")
+		type Arguments = [(foo: number) => void, 0]
+		type Result<T> = typedly.Function.Parameter<Arguments[0], Arguments[1]> extends T ? true : false
+		const match: typedly.Function.Parameter<Arguments[0], Arguments[1]> extends Parameter<Arguments[0], Arguments[1]>
+			? true
+			: false = true
+		const truthy: Result<number> = true
+		const falsy: Result<string> = false
+		expect(truthy).toEqual(true)
+		expect(falsy).toEqual(false)
+		expect(match).toEqual(true)
 	})
 	it("ProtectedConstructorParameters (abstract class)", () => {
 		abstract class Base {
 			constructor(protected foo: string) {}
 		}
 		class Implementation extends Base {
-			constructor(...parameters: typedly.ProtectedConstructorParameters<typeof Base>) {
+			constructor(...parameters: typedly.Function.ProtectedConstructorParameters<typeof Base>) {
 				super(...parameters)
 			}
 		}
@@ -36,7 +41,7 @@ describe("Function", () => {
 			protected constructor(foo: string) {}
 		}
 		class Implementation extends Base {
-			constructor(...parameters: ProtectedConstructorParameters<typeof Base>) {
+			constructor(...parameters: typedly.Function.ProtectedConstructorParameters<typeof Base>) {
 				super(...parameters)
 			}
 		}
