@@ -63,8 +63,7 @@ describe("Object", () => {
 		expect(Object.values(source).every(value => values.includes(value))).toEqual(true)
 	})
 	it("Writeable", () => {
-		const readonly: Readonly<Record<"foo", number>> = { foo: 123 }
-		const writeable: typedly.Object.Writeable<typeof readonly> = readonly
+		const writeable: typedly.Object.Writeable<Readonly<Record<"foo", number>>> = { foo: 123 }
 		expect((writeable.foo = 456)).toEqual(456)
 	})
 	it("RemoveMethods", () => {
