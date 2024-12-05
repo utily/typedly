@@ -62,6 +62,11 @@ describe("Object", () => {
 		const values: typedly.Array.UnionValues<Result> = [true, 1, "text"]
 		expect(Object.values(source).every(value => values.includes(value))).toEqual(true)
 	})
+	it("Writeable", () => {
+		const readonly: Readonly<Record<"foo", number>> = { foo: 123 }
+		const writeable: typedly.Object.Writeable<typeof readonly> = readonly
+		expect((writeable.foo = 456)).toEqual(456)
+	})
 	it("RemoveMethods", () => {
 		const source = { foo: "text", bar() {}, baz: () => {} }
 		type Result = typedly.Object.RemoveMethods<typeof source>
