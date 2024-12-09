@@ -5,6 +5,10 @@ describe("Promise", () => {
 		await new Promise(resolve => setTimeout(resolve, 0))
 		return value
 	}
+	it("Promise.Maybe<T>", async () => {
+		const values: typedly.Promise.Maybe<number>[] = [new Promise(r => r(1)), 1]
+		return expect((await Promise.all(values)).every(value => value == 1)).toEqual(true)
+	})
 	it("Promise.lazy(), Max one work call", async () => {
 		let result: number
 		let calls = 0

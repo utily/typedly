@@ -1,5 +1,6 @@
 export type Promise<T> = globalThis.Promise<T>
 export namespace Promise {
+	export type Maybe<T> = T | Promise<T>
 	export type Lazy<T extends (...argument: any[]) => Promise<unknown>> = T & { force: T }
 	export function lazy<T extends (...argument: any[]) => Promise<unknown>>(
 		factory: () => T,
