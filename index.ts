@@ -7,6 +7,7 @@ import { TypedlyObject as typedlyObject } from "./Object"
 import { Promise as typedlyPromise } from "./Promise"
 import { Stack as typedlyStack } from "./Stack"
 import { TypedlyString as typedlyString } from "./String"
+import { Undefined as typedlyUndefined } from "./Undefined"
 import { Vector as typedlyVector } from "./Vector"
 
 export namespace typedly {
@@ -19,5 +20,6 @@ export namespace typedly {
 	export import Stack = typedlyStack
 	export import String = typedlyString
 	export import Vector = typedlyVector
+	export import Undefined = typedlyUndefined
 	export import Promise = typedlyPromise
 }
