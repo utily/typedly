@@ -5,16 +5,13 @@ export namespace Promise {
 	export type Maybe<T> = T | globalThis.Promise<T> | Promise<T>
 	export type Lazy<T extends (...argument: any[]) => globalThis.Promise<unknown>> = T & { force: T }
 	export function create<T, R = any>(executor?: (resolve: Resolve<T>, reject: Reject<R>) => void): Promise<T> {
-		const callbacks: { resolve?: Resolve<T>; reject?: Reject } = {}
+		const functions: { resolve: Resolve<T>; reject: Reject } = { resolve: () => {}, reject: () => {} }
 		const promise = new globalThis.Promise<T>((resolve, reject) => {
-			callbacks.resolve = resolve
-			callbacks.reject = reject
+			functions.resolve = resolve
+			functions.reject = reject
 			executor?.(resolve, reject)
 		})
-		return Object.assign(promise, {
-			resolve: (...parameters: Parameters<Resolve<T>>) => callbacks.resolve?.(...parameters),
-			reject: (...parameters: Parameters<Reject>) => callbacks.reject?.(...parameters),
-		})
+		return Object.assign(promise, functions)
 	}
 	export function from<T>(promise: PromiseLike<T>): Promise<T, unknown> {
 		return Promise.create(async (resolve, reject) => {
