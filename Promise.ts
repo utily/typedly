@@ -16,6 +16,15 @@ export namespace Promise {
 			reject: (...parameters: Parameters<Reject>) => callbacks.reject?.(...parameters),
 		})
 	}
+	export function from<T>(promise: PromiseLike<T>): Promise<T, unknown> {
+		return Promise.create(async (resolve, reject) => {
+			try {
+				resolve(await promise)
+			} catch (e) {
+				reject(e)
+			}
+		})
+	}
 	export function lazy<T extends (...argument: any[]) => globalThis.Promise<unknown>>(
 		factory: () => T,
 		duplicate?: (...argument: Parameters<T>) => unknown
@@ -45,33 +54,22 @@ export namespace Promise {
 			}),
 		})
 	}
-	export function wait<T extends globalThis.Promise<T>>(promise: T, getLatest: () => T): T {
-		console.log("have resolve:", "resolve" in promise)
-		// convert to typedly Promise?
-		return promise.then(() => {
-			const latest = getLatest()
-			if (promise === latest)
-				return promise
-			return wait(latest, getLatest)
-		})
-	}
-	export function awaitLatest<T extends (...argument: any[]) => globalThis.Promise<unknown>>(task: T): T {
-		let latest: globalThis.Promise<unknown>
-		return <T>((...argument) => {
+	export function awaitLatest<T, A extends unknown[]>(
+		task: (...argument: A) => globalThis.Promise<T> | Promise<T>
+	): (...argument: A) => Promise<T> {
+		let latest: globalThis.Promise<T>
+		const result = (...argument: A) => {
 			latest = task(...argument)
-			const result = wait(latest, () => latest)
-			console.log("have result in result", "resolve" in result)
-			return result
-		})
-		// return <T>(async (...argument) => {
-		// 	latest = task(...argument)
-		// 	return latest.then(async () => {
-		// 		let result: globalThis.Promise<unknown>
-		// 		do {
-		// 			await (result = latest)
-		// 		} while (result != latest)
-		// 		return result
-		// 	})
-		// })
+			return Promise.from(
+				latest.then(async () => {
+					let result: globalThis.Promise<T>
+					do {
+						await (result = latest)
+					} while (result != latest)
+					return result
+				})
+			)
+		}
+		return result
 	}
 }

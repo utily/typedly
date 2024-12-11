@@ -56,7 +56,7 @@ describe("Promise", () => {
 		}
 		expect(order).toEqual(4)
 	})
-	it(`typedly.Promise used with lazy function`, async () => {
+	it(`typedly.Promise lazy + awaitLatest compatibility`, async () => {
 		const lazy = typedly.Promise.lazy(() =>
 			typedly.Promise.awaitLatest((value: number) => typedly.Promise.create<number>(resolve => resolve(value)))
 		)
@@ -109,19 +109,24 @@ describe("Promise", () => {
 	})
 	it("awaitLatest", async () => {
 		let result: number
+		console.log("1")
 		const processed = typedly.Promise.awaitLatest(work)
+		console.log("2", processed)
 		result = (await Promise.all([processed(2), processed(3), processed(5)])).reduce(
 			(result, number) => result + number,
 			0
 		)
+		console.log("3")
 		// older versions of calls to `processed()` will only resolved if it finishes before another call to `processed()` starts.
 		// if more calls occurs before it finishes it will await result from the latest call.
 		// expecting 3 * value of last call
 		expect(result).toEqual(15)
+		console.log("4")
 		result = (await Promise.all([processed(5), processed(3), processed(2)])).reduce(
 			(result, number) => result + number,
 			0
 		)
+		console.log("5")
 		expect(result).toEqual(6)
 	})
 	it("awaitLatest + lazy", async () => {
