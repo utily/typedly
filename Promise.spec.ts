@@ -9,6 +9,62 @@ describe("Promise", () => {
 		const values: typedly.Promise.Maybe<number>[] = [new Promise(r => r(1)), 1]
 		return expect((await Promise.all(values)).every(value => value == 1)).toEqual(true)
 	})
+	it(`typedly.Promise "normal" resolve`, async () => {
+		const promise = typedly.Promise.create(resolve => setTimeout(() => resolve(1), 0))
+		expect(await promise).toEqual(1)
+	})
+	it(`typedly.Promise "normal" reject`, async () => {
+		try {
+			await new Promise((_, reject) => setTimeout(() => reject(-1), 0))
+		} catch (e) {
+			expect(e).toEqual(-1)
+		}
+	})
+	it(`typedly.Promise "extended" resolve`, async () => {
+		let order = 0
+		const promise = typedly.Promise.create<number>()
+		expect(order++).toEqual(0)
+		typedly.Promise.create<boolean>(resolve => {
+			expect(order++).toEqual(1)
+			setTimeout(() => {
+				expect(order++).toEqual(3)
+				promise.resolve(100)
+				resolve(true)
+			}, 0)
+		})
+		expect(order++).toEqual(2)
+		expect(await promise).toEqual(100)
+		expect(order).toEqual(4)
+	})
+	it(`typedly.Promise "extended" reject`, async () => {
+		let order = 0
+		const promise = typedly.Promise.create<void, number>()
+		expect(order++).toEqual(0)
+		typedly.Promise.create<void, void>(resolve => {
+			expect(order++).toEqual(1)
+			setTimeout(() => {
+				expect(order++).toEqual(3)
+				promise.reject(-1)
+				resolve()
+			}, 0)
+		})
+		expect(order++).toEqual(2)
+		try {
+			await promise
+		} catch (e) {
+			expect(e).toEqual(-1)
+		}
+		expect(order).toEqual(4)
+	})
+	it(`typedly.Promise used with lazy function`, async () => {
+		const lazy = typedly.Promise.lazy(() =>
+			typedly.Promise.awaitLatest((value: number) => typedly.Promise.create<number>(resolve => resolve(value)))
+		)
+		const promise = lazy(1)
+		promise.resolve(1)
+		expect(await promise).toEqual(1)
+	})
+
 	it("Promise.lazy(), Max one work call", async () => {
 		let result: number
 		let calls = 0
