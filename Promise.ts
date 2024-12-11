@@ -45,17 +45,33 @@ export namespace Promise {
 			}),
 		})
 	}
+	export function wait<T extends globalThis.Promise<T>>(promise: T, getLatest: () => T): T {
+		console.log("have resolve:", "resolve" in promise)
+		// convert to typedly Promise?
+		return promise.then(() => {
+			const latest = getLatest()
+			if (promise === latest)
+				return promise
+			return wait(latest, getLatest)
+		})
+	}
 	export function awaitLatest<T extends (...argument: any[]) => globalThis.Promise<unknown>>(task: T): T {
 		let latest: globalThis.Promise<unknown>
-		return <T>(async (...argument) => {
+		return <T>((...argument) => {
 			latest = task(...argument)
-			return latest.then(async () => {
-				let result: globalThis.Promise<unknown>
-				do {
-					await (result = latest)
-				} while (result != latest)
-				return result
-			})
+			const result = wait(latest, () => latest)
+			console.log("have result in result", "resolve" in result)
+			return result
 		})
+		// return <T>(async (...argument) => {
+		// 	latest = task(...argument)
+		// 	return latest.then(async () => {
+		// 		let result: globalThis.Promise<unknown>
+		// 		do {
+		// 			await (result = latest)
+		// 		} while (result != latest)
+		// 		return result
+		// 	})
+		// })
 	}
 }
