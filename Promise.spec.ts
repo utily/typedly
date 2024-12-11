@@ -15,6 +15,14 @@ describe("Promise", () => {
 		typedlyPromise.resolve(true)
 		expect(await typedlyPromise).toEqual(true)
 	})
+	it("resolve equality", async () => {
+		const promise = typedly.Promise.create<number>(async resolve => {
+			await typedly.Promise.create(resolve => setTimeout(resolve, 0))
+			expect(promise.resolve).toEqual(resolve)
+			resolve(1)
+		})
+		expect(await promise).toEqual(1)
+	})
 	it(`typedly.Promise "normal" resolve`, async () => {
 		const promise = typedly.Promise.create(resolve => setTimeout(() => resolve(1), 0))
 		expect(await promise).toEqual(1)
