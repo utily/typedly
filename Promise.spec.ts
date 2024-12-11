@@ -9,6 +9,12 @@ describe("Promise", () => {
 		const values: typedly.Promise.Maybe<number>[] = [new Promise(r => r(1)), 1]
 		return expect((await Promise.all(values)).every(value => value == 1)).toEqual(true)
 	})
+	it(`typedly.Promise.from`, async () => {
+		const promise = new Promise<boolean>(resolve => setTimeout(() => resolve(false), Number.MAX_SAFE_INTEGER))
+		const typedlyPromise = typedly.Promise.from(promise)
+		typedlyPromise.resolve(true)
+		expect(await typedlyPromise).toEqual(true)
+	})
 	it(`typedly.Promise "normal" resolve`, async () => {
 		const promise = typedly.Promise.create(resolve => setTimeout(() => resolve(1), 0))
 		expect(await promise).toEqual(1)
