@@ -10,10 +10,12 @@ describe("Promise", () => {
 		return expect((await Promise.all(values)).every(value => value == 1)).toEqual(true)
 	})
 	it(`typedly.Promise.from`, async () => {
-		const promise = new Promise<boolean>(resolve => setTimeout(() => resolve(false), Number.MAX_SAFE_INTEGER))
+		let timeout: any
+		const promise = new Promise<boolean>(resolve => (timeout = setTimeout(() => resolve(false), 2 ** 31 - 1)))
 		const typedlyPromise = typedly.Promise.from(promise)
 		typedlyPromise.resolve(true)
 		expect(await typedlyPromise).toEqual(true)
+		clearTimeout(timeout)
 	})
 	it("resolve equality", async () => {
 		const promise = typedly.Promise.create<number>(async resolve => {
