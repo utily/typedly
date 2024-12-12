@@ -1,4 +1,5 @@
 export type Promise<T, R = any> = globalThis.Promise<T> & { resolve: Promise.Resolve<T>; reject: Promise.Reject<R> }
+
 export namespace Promise {
 	export type Resolve<T> = (value: T | globalThis.PromiseLike<T>) => void
 	export type Reject<T = any> = (reason: T) => void
