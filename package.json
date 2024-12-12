@@ -14,12 +14,24 @@
 	"module": "./dist/mjs/index.js",
 	"exports": {
 		".": {
-			"import": "./dist/mjs/index.js",
-			"require": "./dist/cjs/index.js"
+			"import": {
+				"default": "./dist/mjs/index.js",
+				"types": "./dist/index.d.ts"
+			},
+			"require": {
+				"default": "./dist/cjs/index.js",
+				"types": "./dist/index.d.ts"
+			}
 		},
 		"./dist/global": {
-			"import": "./dist/mjs/global.js",
-			"require": "./dist/cjs/index.js"
+			"import": {
+				"default": "./dist/mjs/global.js",
+				"types": "./dist/global.d.ts"
+			},
+			"require": {
+				"default": "./dist/cjs/index.js",
+				"types": "./dist/global.d.ts"
+			}
 		}
 	},
 	"types": "dist/index.d.ts",
