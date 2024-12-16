@@ -63,9 +63,9 @@ describe("Object", () => {
 		expect(paths.length).toEqual(7)
 	})
 	it("KeyOf", () => {
-		const source = { foo: "text", bar: 1, baz: true } as const
+		const source = { foo1: "text", bar1: 1, baz1: true } as const
 		type Result = typedly.Object.KeyOf<typeof source>
-		const keys: typedly.Array.UnionValues<Result> = ["foo", "baz", "bar"]
+		const keys: typedly.Array.UnionValues<Result> = ["foo1", "bar1", "baz1"]
 		expect(keys.every(key => key in source)).toEqual(true)
 	})
 	it("ValueOf", () => {
