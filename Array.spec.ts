@@ -2,9 +2,9 @@ import { typedly } from "./index"
 
 describe("Array", () => {
 	it("Union", () => {
-		type UnionArray = typedly.Array.UnionValues<"foo" | "bar" | "baz">
-		const array: UnionArray = ["foo", "bar", "baz"]
-		expect(array).toEqual(["foo", "bar", "baz"])
+		type UnionArray = typedly.Array.UnionValues<"foo1" | "bar1" | "baz1">
+		const array: UnionArray = ["foo1", "bar1", "baz1"]
+		expect(array).toEqual(["foo1", "bar1", "baz1"])
 	})
 	it("OmitFirst", () => {
 		const array = [1, 2, 3] as const
