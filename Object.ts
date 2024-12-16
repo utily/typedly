@@ -2,6 +2,10 @@ export type TypedlyObject<T = any> = {
 	[P in keyof T]: T[P]
 }
 export namespace TypedlyObject {
+	export type Optional<T, Keys extends keyof T> = Omit<T, Keys> &
+		{
+			[Key in Keys]?: T[Key]
+		}
 	export type Writeable<T> = {
 		-readonly [P in keyof T]: T[P]
 	}
