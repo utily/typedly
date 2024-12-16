@@ -1,6 +1,7 @@
 import { TypedlyArray as typedlyArray } from "./Array"
 import { Collection as typedlyCollection } from "./Collection"
 import { Function as typedlyFunction } from "./Function"
+import { Guard as typedlyGuard } from "./Guard"
 import { IterableWeakMap as typedlyIterableWeakMap } from "./IterableWeakMap"
 import { IterableWeakSet as typedlyIterableWeakSet } from "./IterableWeakSet"
 import { Json as typedlyJson } from "./Json"
@@ -15,6 +16,7 @@ export namespace typedly {
 	export import Array = typedlyArray
 	export import Collection = typedlyCollection
 	export import Function = typedlyFunction
+	export import Type = typedlyGuard
 	export import IterableWeakMap = typedlyIterableWeakMap
 	export import IterableWeakSet = typedlyIterableWeakSet
 	export import Json = typedlyJson
