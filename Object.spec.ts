@@ -1,6 +1,18 @@
 import { typedly } from "./index"
 
 describe("Object", () => {
+	it("Optional<T>", () => {
+		type Source = {
+			foo: string
+			bar: number
+			baz: boolean
+		}
+		const result: typedly.Object.Optional<Source, "foo" | "baz"> = {
+			bar: 123,
+			baz: true,
+		}
+		expect(Object.keys(result).length).toBeLessThan(3)
+	})
 	it("DistributiveOmit", () => {
 		type A = { a: string; common: number }
 		type B = { b: boolean; common: number }
@@ -53,7 +65,7 @@ describe("Object", () => {
 	it("KeyOf", () => {
 		const source = { foo: "text", bar: 1, baz: true } as const
 		type Result = typedly.Object.KeyOf<typeof source>
-		const keys: typedly.Array.UnionValues<Result> = ["foo", "bar", "baz"]
+		const keys: typedly.Array.UnionValues<Result> = ["foo", "baz", "bar"]
 		expect(keys.every(key => key in source)).toEqual(true)
 	})
 	it("ValueOf", () => {

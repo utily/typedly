@@ -1,6 +1,7 @@
 import { typedly } from "./index"
 
 declare global {
+	export type Optional<T, Keys extends keyof T> = typedly.Object.Optional<T, Keys>
 	export type MaybePromise<T> = typedly.Promise.Maybe<T>
 	export type Writeable<T> = typedly.Object.Writeable<T>
 	export type DistributiveOmit<T, K extends keyof any> = typedly.Object.DistributiveOmit<T, K>
