@@ -34,7 +34,6 @@
 		"forceConsistentCasingInFileNames": true,
 		"baseUrl": ".",
 		"types": [
-			"node",
 			"jest",
 			"@types/jest",
 		]
