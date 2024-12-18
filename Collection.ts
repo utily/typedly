@@ -134,5 +134,40 @@ export abstract class Collection<T> {
 	toJSON(): T[] {
 		return this.toArray()
 	}
+	[Symbol.unscopables]?: {
+		readonly [x: number]: boolean | undefined
+		readonly length?: boolean | undefined
+		toString?: boolean | undefined
+		toLocaleString?: boolean | undefined
+		concat?: boolean | undefined
+		join?: boolean | undefined
+		slice?: boolean | undefined
+		indexOf?: boolean | undefined
+		lastIndexOf?: boolean | undefined
+		every?: boolean | undefined
+		some?: boolean | undefined
+		forEach?: boolean | undefined
+		map?: boolean | undefined
+		filter?: boolean | undefined
+		reduce?: boolean | undefined
+		reduceRight?: boolean | undefined
+		find?: boolean | undefined
+		findIndex?: boolean | undefined
+		entries?: boolean | undefined
+		keys?: boolean | undefined
+		values?: boolean | undefined
+		includes?: boolean | undefined
+		flatMap?: boolean | undefined
+		flat?: boolean | undefined
+		at?: boolean | undefined
+		findLast?: boolean | undefined
+		findLastIndex?: boolean | undefined
+		toReversed?: boolean | undefined
+		toSorted?: boolean | undefined
+		toSpliced?: boolean | undefined
+		with?: boolean | undefined
+		[Symbol.iterator]?: boolean | undefined
+		readonly [Symbol.unscopables]?: boolean | undefined
+	}
 }
 export namespace Collection {}
