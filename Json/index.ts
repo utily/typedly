@@ -1,33 +1,31 @@
 import { isly } from "isly"
 import { Data as JsonData } from "./Data"
+import { Options as JsonOptions } from "./Options"
+import { Typed as JsonTyped } from "./Typed"
+import { Untyped as JsonUntyped } from "./Untyped"
 
-export class Json<T extends Json.Data<T> = Json.Data> {
-	constructor(public options: Json.Options<T> = { type: Json.Data.type as isly.Type<T> }) {}
-	parse(data: string): T | undefined {
-		let result: unknown | undefined
-		try {
-			result = JSON.parse(data)
-		} catch {
-			result = undefined
-		}
-		return (this.options.type ?? isly.any()).get(result)
-	}
-	stringify(data: T): string {
-		return JSON.stringify(data, this.options?.replacer, this.options?.space)
-	}
-	static #default: Json | undefined
-	static parse<T extends Json.Data<T> = Json.Data>(data: string): T | undefined {
-		return (Json.#default ??= new Json()).parse(data) as T
-	}
-	static stringify<T extends Json.Data<T> = Json.Data>(data: T): string {
-		return (Json.#default ??= new Json()).stringify(data)
-	}
-}
+export type Json<T extends Json.Data<T> = undefined> = T extends undefined
+	? Json.Untyped | Json.Typed<JsonData>
+	: Json.Typed<T>
 export namespace Json {
 	export import Data = JsonData
-	export interface Options<T extends Json.Data = JsonData> {
-		type?: isly.Type<T>
-		replacer?: (this: any, key: string, value: any) => any
-		space?: string | number
+	export import Options = JsonOptions
+	export type Typed<T extends Json.Data> = JsonTyped<T> // only export as type, must use Json.create
+	export type Untyped = JsonUntyped // only export as type, must use Json.create
+
+	export function create<T extends Json.Data<T>>(type: isly.Type<T>, options?: Json.Options): Json<T>
+	export function create(options?: Json.Options): Json
+	export function create<T extends Json.Data<T> = undefined>(
+		type?: isly.Type<T> | Options,
+		options?: Json.Options
+	): Json<T> | Json {
+		return type && "is" in type ? new JsonTyped<T>(type, options) : new JsonUntyped(type)
+	}
+	let parser: Json | undefined
+	export function parse<T extends Json.Data<T> = Json.Data>(data: string): T | undefined {
+		return (parser ??= create()).parse(data) as T
+	}
+	export function stringify<T extends Json.Data<T> = Json.Data>(data: T): string {
+		return (parser ??= create()).stringify(data)
 	}
 }
