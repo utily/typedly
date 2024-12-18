@@ -1,6 +1,6 @@
 import { isly } from "isly"
 
-export type Data = boolean | string | number | null | undefined | Data.Object | Data.Array
+export type Data<T = Record<string, never>> = boolean | string | number | null | undefined | Data.Object<T> | Data.Array
 export namespace Data {
 	export const type: isly.Type<Data> = isly.lazy(() =>
 		isly.named<Data>(
@@ -19,8 +19,8 @@ export namespace Data {
 	export const is = type.is
 	export const flaw = type.flaw
 
-	export interface Object {
-		[property: string]: Data | undefined
+	export type Object<T = Record<string, never>> = {
+		[property in keyof T]: Data
 	}
 	export namespace Object {
 		export const type = isly.named<Object>("typedly.Json.Data.Object", isly.record<Object>(isly.string(), Data.type))

@@ -1,7 +1,7 @@
 import { isly } from "isly"
 import { Data as JsonData } from "./Data"
 
-export class Json<T extends Json.Data = Json.Data> {
+export class Json<T extends Json.Data<T> = Json.Data> {
 	constructor(public options: Json.Options<T> = { type: Json.Data.type as isly.Type<T> }) {}
 	parse(data: string): T | undefined {
 		let result: unknown | undefined
@@ -16,10 +16,10 @@ export class Json<T extends Json.Data = Json.Data> {
 		return JSON.stringify(data, this.options?.replacer, this.options?.space)
 	}
 	static #default: Json | undefined
-	static parse<T extends Json.Data = Json.Data>(data: string): T | undefined {
+	static parse<T extends Json.Data<T> = Json.Data>(data: string): T | undefined {
 		return (Json.#default ??= new Json()).parse(data) as T
 	}
-	static stringify<T extends Json.Data = Json.Data>(data: T): string {
+	static stringify<T extends Json.Data<T> = Json.Data>(data: T): string {
 		return (Json.#default ??= new Json()).stringify(data)
 	}
 }

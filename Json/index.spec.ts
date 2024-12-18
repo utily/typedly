@@ -9,4 +9,26 @@ describe("typedly.Json", () => {
 	"alpha": 42
 }"
 `))
+	it.each([
+		[{}, "{}"],
+		["", '""'],
+		[0, "0"],
+		[undefined, undefined],
+		[null, "null"],
+		[{ 0: false }, '{"0":false}'],
+		[false, "false"],
+		[{ [Symbol.toStringTag]: "string" }, "{}"],
+		[new ArrayBuffer(1024) as any, "{}"],
+	])("stringify %s", (data, expected) => expect(typedly.Json.stringify(data)).toEqual(expected))
+	it("testing type", () => {
+		interface A {
+			x: number
+			y: number
+		}
+		const a: A = {
+			x: 42,
+			y: 13.37,
+		}
+		expect(typedly.Json.stringify(a)).toEqual('{"x":42,"y":13.37}')
+	})
 })
