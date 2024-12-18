@@ -12,6 +12,20 @@
 		"*.config.ts": true,
 		"coverage": true
 	},
+		"search.exclude": {
+		".*": true,
+		"*.sh": true,
+		"*.json": true,
+		"CODEOWNERS": true,
+		"dist": true,
+		"README.md": true,
+		"LICENSE": true,
+		"tsconfig.*": true,
+		"node_modules": true,
+		"*.code-workspace": true,
+		"*.config.ts": true,
+		"coverage": true
+	},
 	"files.insertFinalNewline": true,
 	"editor.tabSize": 2,
 	"editor.detectIndentation": false,
