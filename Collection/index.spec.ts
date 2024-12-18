@@ -1,4 +1,4 @@
-import { typedly } from "./index"
+import { typedly } from "../index"
 
 describe("Collection", () => {
 	const backend: readonly number[] = [0, 1, 2, 2]
