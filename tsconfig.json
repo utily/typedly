@@ -34,8 +34,8 @@
 		"forceConsistentCasingInFileNames": true,
 		"baseUrl": ".",
 		"types": [
-			"jest",
-			"@types/jest",
+			"node",
+			"vitest/globals"
 		]
 	},
 	"include": [
