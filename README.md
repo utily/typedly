@@ -24,7 +24,7 @@ The types in this library can accessed in one of the following methods:
   ```json
   // tsconfig.json
   {
-  	"types": ["typedly/dist/global.d.ts"]
+  	"types": ["typedly/dist/types/global.d.ts"]
   }
   ```
   ```ts

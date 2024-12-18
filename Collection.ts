@@ -128,7 +128,13 @@ export abstract class Collection<T> {
 	with(index: number, value: T): T[] {
 		return this.toArray().with(index, value)
 	}
-	[Symbol.unscopables]: {
+	toArray(): T[] {
+		return [...this]
+	}
+	toJSON(): T[] {
+		return this.toArray()
+	}
+	[Symbol.unscopables]?: {
 		readonly [x: number]: boolean | undefined
 		readonly length?: boolean | undefined
 		toString?: boolean | undefined
@@ -162,12 +168,6 @@ export abstract class Collection<T> {
 		with?: boolean | undefined
 		[Symbol.iterator]?: boolean | undefined
 		readonly [Symbol.unscopables]?: boolean | undefined
-	}
-	toArray(): T[] {
-		return [...this]
-	}
-	toJSON(): T[] {
-		return this.toArray()
 	}
 }
 export namespace Collection {}
