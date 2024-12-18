@@ -8,6 +8,7 @@ export default defineConfig({
 		},
 		coverage: {
 			reporter: ["text", "json", "html"],
+			provider: "istanbul",
 		},
 		globals: true,
 		include: ["**/*.spec.[tj]s"],
