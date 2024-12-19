@@ -1,6 +1,6 @@
 {
 	"name": "typedly",
-	"version": "0.0.23",
+	"version": "0.0.24",
 	"description": "A collection of utility types.",
 	"author": "Utily Contributors",
 	"license": "MIT",
@@ -65,6 +65,5 @@
 	},
 	"dependencies": {
 		"isly": "^0.1.23"
-
 	}
 }
