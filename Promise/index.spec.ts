@@ -1,4 +1,4 @@
-import { typedly } from "./index"
+import { typedly } from "../index"
 
 describe("Promise", () => {
 	async function work<T>(value: T): Promise<T> {

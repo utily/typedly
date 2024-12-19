@@ -1,4 +1,4 @@
-import { typedly } from "./index"
+import { typedly } from "../index"
 
 describe("IterableWeakMap", () => {
 	const runGarbageCollector =

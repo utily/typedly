@@ -35,8 +35,7 @@
 		"baseUrl": ".",
 		"types": [
 			"node",
-			"jest",
-			"@types/jest",
+			"vitest/globals"
 		]
 	},
 	"include": [

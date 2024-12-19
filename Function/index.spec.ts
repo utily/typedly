@@ -1,5 +1,5 @@
 import "./global"
-import { typedly } from "./index"
+import { typedly } from "../index"
 
 describe("Function", () => {
 	it("Return", () => {
