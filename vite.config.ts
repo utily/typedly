@@ -17,12 +17,7 @@ export default defineConfig({
 		exclude: ["node_modules", "dist"],
 		server: {
 			deps: {
-				inline: ["cryptly", "isly", "isoly", "typedly"],
-			},
-		},
-		poolOptions: {
-			forks: {
-				execArgv: ["--expose-gc"],
+				inline: ["isly"],
 			},
 		},
 	},
