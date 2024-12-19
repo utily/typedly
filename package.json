@@ -5,9 +5,9 @@
 	"author": "Utily Contributors",
 	"license": "MIT",
 	"private": false,
-	"repository": "https://github.com/utily/authly",
+	"repository": "https://github.com/utily/typedly",
 	"bugs": {
-		"url": "https://github.com/utily/authly/issues"
+		"url": "https://github.com/utily/typedly/issues"
 	},
 	"homepage": "https://github.com/utily",
 	"type": "module",
