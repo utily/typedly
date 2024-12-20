@@ -5,6 +5,11 @@ describe("Promise", () => {
 		await new Promise(resolve => setTimeout(resolve, 0))
 		return value
 	}
+	it("Promise.promisify", async () => {
+		const source = { foo: "hello", bar: 123, baz: true }
+		const result: typedly.Promise.Promisify<typeof source> = typedly.Promise.promisify(source)
+		expect(typedly.Object.entries(result).every(async ([key, value]) => source[key] == (await value))).toEqual(true)
+	})
 	it("Promise.Maybe<T>", async () => {
 		const values: typedly.Promise.Maybe<number>[] = [new Promise(r => r(1)), 1]
 		return expect((await Promise.all(values)).every(value => value == 1)).toEqual(true)
