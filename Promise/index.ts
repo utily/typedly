@@ -1,4 +1,4 @@
-import { TypedlyObject } from "Object"
+import { TypedlyObject } from "../Object"
 
 export type Promise<T, R = any> = globalThis.Promise<T> & { resolve: Promise.Resolve<T>; reject: Promise.Reject<R> }
 export namespace Promise {
