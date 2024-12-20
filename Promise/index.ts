@@ -1,10 +1,15 @@
-export type Promise<T, R = any> = globalThis.Promise<T> & { resolve: Promise.Resolve<T>; reject: Promise.Reject<R> }
+import { TypedlyObject } from "Object"
 
+export type Promise<T, R = any> = globalThis.Promise<T> & { resolve: Promise.Resolve<T>; reject: Promise.Reject<R> }
 export namespace Promise {
 	export type Resolve<T> = (value: T | globalThis.PromiseLike<T>) => void
 	export type Reject<T = any> = (reason: T) => void
 	export type Maybe<T> = T | globalThis.Promise<T> | Promise<T>
 	export type Lazy<T extends (...argument: any[]) => globalThis.Promise<unknown>> = T & { force: T }
+	export type Promisify<T> = { [Key in keyof T]: globalThis.Promise<T[Key]> }
+	export function promisify<T>(value: T): Promisify<T> {
+		return TypedlyObject.mapValues<T, Promisify<T>>(value, value => globalThis.Promise.resolve(value))
+	}
 	export function create<T, R = any>(executor?: (resolve: Resolve<T>, reject: Reject<R>) => void): Promise<T> {
 		const functions: { resolve: Resolve<T>; reject: Reject } = { resolve: () => {}, reject: () => {} }
 		const promise = new globalThis.Promise<T>((resolve, reject) => {
