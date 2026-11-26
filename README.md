@@ -1,40 +1,24 @@
 # Typedly
 
-## Usage / Configuration
+## Usage
 
-The types in this library can accessed in one of the following methods:
+Use namespace imports from the package root:
 
-- ### Namespace import:
+```ts
+import { typedly } from "typedly"
 
-  ```ts
-  // index.ts
-  import { typedly } from "typedly"
+type MyUnion = { a: string; common: boolean } | { b: string; common: boolean }
+export type Usage = typedly.Object.DistributiveOmit<MyUnion, "common">
+```
 
-  type MyUnion = { a: string, common: boolean } | { b: string, common: boolean }
-  export type Usage = typedly.DistributiveOmit<MyUnion, "common">
-  ```
+## Overview
 
-- ### Direct import:
+Typedly is split into focused namespaces:
 
-  ```ts
-  // index.ts
-  import { DistributiveOmit } from "typedly/dist/typedly"
-
-  type MyUnion = { a: string, common: boolean } | { b: string, common: boolean }
-  export type Usage = DistributiveOmit<MyUnion, "common">
-  ```
-- ### Injecting the types globally using `tsconfig.json`:
-  - Injecting the types globally using `tsconfig.json`:
-
-  ```json
-  // tsconfig.json
-  {
-  	"types": ["typedly/dist/types/global.d.ts"]
-  }
-  ```
-
-  ```ts
-  // index.ts
-  type MyUnion = { a: string, common: boolean } | { b: string, common: boolean }
-  export type Usage = DistributiveOmit<MyUnion, "common">
-  ```
+- `typedly.Object`, `typedly.Array`, `typedly.Function`: object, tuple/union, and function utility types.
+- `typedly.Guard` (via `typedly.Type`): composable runtime type guards.
+- `typedly.Promise`: async utility types and helpers (`create`, `lazy`, `awaitLatest`, `promisify`).
+- `typedly.Json`: typed and untyped JSON parse/stringify helpers.
+- `typedly.Collection`, `typedly.Stack`, `typedly.Vector`: collection interfaces and base abstractions.
+- `typedly.IterableWeakMap`, `typedly.IterableWeakSet`: iterable weak-reference collections.
+- `typedly.String`, `typedly.Undefined`, `typedly.Inverse`: small focused helper namespaces.
