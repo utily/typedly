@@ -13,6 +13,11 @@
 	"type": "module",
 	"module": "./dist/mjs/index.js",
 	"types": "./dist/types/index.d.ts",
+	"files": [
+		"dist",
+		"LICENSE",
+		"README.md"
+	],
 	"exports": {
 		".": {
 			"import": {
@@ -42,26 +47,23 @@
 		"release": true
 	},
 	"scripts": {
-		"lint": "eslint --max-warnings=0 '**/*.{ts,tsx}'",
-		"fix": "eslint '**/*.{ts,tsx}' --fix",
-		"build": "rimraf dist/* && tsc -p tsconfig.mjs.json && tsc -p tsconfig.cjs.json",
+		"build": "rimraf dist/* && tsc -p tsconfig.build.json && tsc -p tsconfig.cjs.json",
+		"lint": "biome format .",
+		"format": "biome format --write .",
 		"test": "vitest --run",
 		"coverage": "vitest --coverage",
 		"prepare": "npm run build",
 		"clean": "rimraf dist node_modules coverage",
-		"verify": "npm run build && npm run test && npm run lint && npm audit"
+		"verify": "npm run build && npm run test && npm run coverage && npm run lint && npm audit"
 	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "8.18.1",
-		"@typescript-eslint/parser": "8.18.1",
-		"@vitest/coverage-istanbul": "^2.1.8",
-		"eslint": "^8.57.0",
-		"eslint-plugin-prettierx": "github:utily/eslint-plugin-prettierx#utily-20231004",
-		"eslint-plugin-simple-import-sort": "^12.1.1",
-		"prettierx": "github:utily/prettierx#utily-20231004",
-		"rimraf": "^6.0.1",
-		"typescript": "^5.7.2",
-		"vitest": "^2.1.8"
+		"@biomejs/biome": "2.6.9",
+		"@types/node": "26.6.11",
+		"@vitest/coverage-v8": "5.1.2",
+		"rimraf": "6.1.4",
+		"typescript": "7.0.2",
+		"vite": "8.3.8",
+		"vitest": "5.1.2"
 	},
 	"dependencies": {
 		"isly": "^0.1.23"

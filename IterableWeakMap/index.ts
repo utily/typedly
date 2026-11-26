@@ -11,9 +11,7 @@ export class IterableWeakMap<TKey extends WeakKey, TValue> {
 	}
 
 	constructor(iterable?: Iterable<[TKey, TValue]>) {
-		if (iterable)
-			for (const [key, value] of iterable)
-				this.set(key, value)
+		if (iterable) for (const [key, value] of iterable) this.set(key, value)
 	}
 
 	set(key: TKey, value: TValue): this {
@@ -34,8 +32,7 @@ export class IterableWeakMap<TKey extends WeakKey, TValue> {
 
 	delete(key: TKey) {
 		const entry = this.#backend.get(key)
-		if (!entry)
-			return false
+		if (!entry) return false
 		this.#backend.delete(key)
 		this.#set.delete(entry.reference)
 		this.#finalization.unregister(entry.reference)
@@ -43,18 +40,15 @@ export class IterableWeakMap<TKey extends WeakKey, TValue> {
 	}
 
 	forEach(callback: (value: TValue, key: TKey) => void) {
-		for (const [key, value] of this)
-			callback(value, key)
+		for (const [key, value] of this) callback(value, key)
 	}
 
 	*[Symbol.iterator](): Generator<[TKey, TValue], void> {
 		for (const ref of this.#set) {
 			const key = ref.deref()
-			if (!key)
-				continue
+			if (!key) continue
 			const stored = this.#backend.get(key)
-			if (stored)
-				yield [key, stored.value]
+			if (stored) yield [key, stored.value]
 		}
 	}
 
@@ -63,13 +57,11 @@ export class IterableWeakMap<TKey extends WeakKey, TValue> {
 	}
 
 	*keys(): Generator<TKey, void> {
-		for (const [key] of this)
-			yield key
+		for (const [key] of this) yield key
 	}
 
 	*values(): Generator<TValue, void> {
-		for (const [, value] of this)
-			yield value
+		for (const [, value] of this) yield value
 	}
 }
 export namespace IterableWeakMap {}

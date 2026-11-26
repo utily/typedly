@@ -2,12 +2,10 @@
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
 		"module": "CommonJS",
-		// where cjs is omitted. point package.json `exports` (require) field to these.
-		// if a `main` field is declared in package.json point it to these as well.
+		"noEmit": false,
 		"outDir": "dist/cjs",
-		"types": [],
+		"declaration": false
 	},
-	"exclude": [
-		"**/*.spec.ts"
-	]
+	"exclude": ["**/*.spec.ts", "coverage", "dist", "node_modules", "vite.config.ts"],
+	"files": ["index.ts"]
 }

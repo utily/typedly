@@ -10,7 +10,7 @@ describe("typedly.Guard", () => {
 		undefined: (value: undefined | unknown): value is undefined => typeof value == "undefined",
 		null: (value: null | unknown): value is null => value === null,
 		falsy: (value: Falsy | unknown): value is Falsy => !value,
-		emptyString: (value: "" | unknown): value is "" => value === "",
+		emptyString: (value: "" | unknown): value is "" => value === ""
 	}
 	const values = [true, false, "a", "", 42, 13.37, [1, 3, 3, 7], [], 0, undefined, null]
 	it.each([
@@ -20,7 +20,7 @@ describe("typedly.Guard", () => {
 		["array", is.array],
 		["undefined", is.undefined],
 		["null", is.null],
-		["falsy", is.falsy],
+		["falsy", is.falsy]
 	])("not %s", (name, is) => {
 		expect(values.filter(typedly.Type.not(is as any))).toMatchSnapshot()
 		expect(values.filter(v => !is(v)).every(typedly.Type.not(is as any))).toEqual(true)
@@ -28,7 +28,7 @@ describe("typedly.Guard", () => {
 	it.each([
 		["boolean | string", is.boolean, is.string],
 		["number | array", is.number, is.array],
-		["undefined | null", is.undefined, is.null],
+		["undefined | null", is.undefined, is.null]
 	])("union %s", (name, isA, isB) => {
 		expect(values.filter(typedly.Type.union(isA as any, isB as any))).toMatchSnapshot()
 		expect(values.filter(v => isA(v) || isB(v)).every(typedly.Type.union(isA as any, isB as any))).toEqual(true)
@@ -36,7 +36,7 @@ describe("typedly.Guard", () => {
 	it.each([
 		["boolean & true", is.boolean, (v: true | unknown): v is true => v === true],
 		["falsy & number", is.falsy, is.number],
-		['string & ""', is.string, is.emptyString],
+		['string & ""', is.string, is.emptyString]
 	])("intersection %s", (name, isA, isB) => {
 		expect(values.filter(typedly.Type.intersection(isA as any, isB as any))).toMatchSnapshot()
 		expect(values.filter(v => isA(v) && isB(v)).every(typedly.Type.intersection(isA as any, isB as any))).toEqual(true)

@@ -10,8 +10,7 @@ describe("Vector", () => {
 			return this.backend[index]
 		}
 		set(index: number, value: T): boolean {
-			if (index < 0 || this.length <= index)
-				return false
+			if (index < 0 || this.length <= index) return false
 			this.backend[index] = value
 			return true
 		}

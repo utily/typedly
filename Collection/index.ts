@@ -78,12 +78,10 @@ export abstract class Collection<T> {
 	}
 	abstract entries(): IterableIterator<[number, T]>
 	*keys(): IterableIterator<number> {
-		for (const [key] of this.entries())
-			yield key
+		for (const [key] of this.entries()) yield key
 	}
 	*values(): IterableIterator<T> {
-		for (const [, value] of this.entries())
-			yield value
+		for (const [, value] of this.entries()) yield value
 	}
 	[Symbol.iterator](): IterableIterator<T> {
 		return this.values()

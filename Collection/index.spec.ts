@@ -51,7 +51,7 @@ describe("Collection", () => {
 	})
 	it("map", () => {
 		const argument = [
-			(value: number, index: number, array: readonly number[]): number => value + index + array.length,
+			(value: number, index: number, array: readonly number[]): number => value + index + array.length
 		] as const
 		expect(collection.map(...argument)).toEqual(backend.map(...argument))
 	})
@@ -63,7 +63,7 @@ describe("Collection", () => {
 		const argument = [
 			(result: number, value: number, index: number, array: readonly number[]): number =>
 				result + value + index + array.length,
-			0,
+			0
 		] as const
 		expect(collection.reduce(...argument)).toEqual(backend.reduce(...argument))
 	})
@@ -71,7 +71,7 @@ describe("Collection", () => {
 		const argument = [
 			(result: number, value: number, index: number, array: readonly number[]): number =>
 				result + value + index + array.length,
-			0,
+			0
 		] as const
 		expect(collection.reduceRight(...argument)).toEqual(backend.reduceRight(...argument))
 	})

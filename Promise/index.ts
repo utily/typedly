@@ -38,11 +38,9 @@ export namespace Promise {
 			let result: globalThis.Promise<unknown>
 			const key = duplicate?.(...argument)
 			let task = tasks.get(key)
-			if (!task)
-				tasks.set(key, (task = factory()))
+			if (!task) tasks.set(key, (task = factory()))
 			const current = ongoing.get(key)
-			if (current)
-				result = current
+			if (current) result = current
 			else {
 				result = task(...argument)
 				ongoing.set(key, result)
@@ -50,12 +48,10 @@ export namespace Promise {
 			}
 			return result
 		})
-		return Object.assign(result, {
-			force: <T>((...argument: Parameters<T>) => {
+		return Object.assign(result, { force: <T>((...argument: Parameters<T>) => {
 				ongoing.delete(duplicate?.(...argument))
 				return result(...argument)
-			}),
-		})
+			}) })
 	}
 	export function awaitLatest<T, A extends unknown[]>(
 		task: (...argument: A) => globalThis.Promise<T> | Promise<T>

@@ -2,15 +2,8 @@ import { typedly } from "../index"
 
 describe("Object", () => {
 	it("Optional<T>", () => {
-		type Source = {
-			foo: string
-			bar: number
-			baz: boolean
-		}
-		const result: typedly.Object.Optional<Source, "foo" | "baz"> = {
-			bar: 123,
-			baz: true,
-		}
+		type Source = { foo: string; bar: number; baz: boolean }
+		const result: typedly.Object.Optional<Source, "foo" | "baz"> = { bar: 123, baz: true }
 		expect(Object.keys(result).length).toBeLessThan(3)
 	})
 	it("DistributiveOmit", () => {
@@ -18,39 +11,22 @@ describe("Object", () => {
 		type B = { b: boolean; common: number }
 		type Union = A | B
 		type CommonOmitted = typedly.Object.DistributiveOmit<Union, "common">
-		const result: CommonOmitted = {
-			a: "hello world",
-		}
+		const result: CommonOmitted = { a: "hello world" }
 		expect(`${result.a}`).toEqual("hello world")
 	})
 	it("DistributiveExclude", () => {
-		type Source = {
-			foo: string | null
-			bar: number | null
-			baz: boolean | null
-		}
+		type Source = { foo: string | null; bar: number | null; baz: boolean | null }
 		type Result = typedly.Object.DistributiveExclude<Source, "foo" | "bar", null>
 		const result: Result = {
 			foo: "hello world", // string
 			bar: 1, // number
-			baz: null, // boolean | null
+			baz: null // boolean | null
 		}
 		expect(result.foo).not.toEqual(null)
 		expect(result.bar).not.toEqual(null)
 	})
 	it("DotNotation", () => {
-		type Source = {
-			value: 0
-			foo: {
-				value: 1
-				bar: {
-					value: 2
-					baz: {
-						value: 3
-					}
-				}
-			}
-		}
+		type Source = { value: 0; foo: { value: 1; bar: { value: 2; baz: { value: 3 } } } }
 		const paths: typedly.Object.DotNotation<Source>[] = [
 			"value",
 			"foo",
@@ -58,7 +34,7 @@ describe("Object", () => {
 			"foo.bar",
 			"foo.bar.value",
 			"foo.bar.baz",
-			"foo.bar.baz.value",
+			"foo.bar.baz.value"
 		]
 		expect(paths.length).toEqual(7)
 	})
@@ -94,7 +70,7 @@ describe("Object", () => {
 		expect(typedly.Object.entries(source)).toEqual([
 			["foo", "text"],
 			["bar", 1],
-			["baz", true],
+			["baz", true]
 		])
 	})
 	it("keys", () => {

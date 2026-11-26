@@ -13,12 +13,10 @@ describe("Vector.Readonly", () => {
 	it("size", () => {
 		const vector = new Vector([1, 2, 3])
 		expect(vector.length).toEqual(3)
-		for (let index = 0; index < vector.length; index++)
-			expect(vector.get(index)).toEqual(index + 1)
+		for (let index = 0; index < vector.length; index++) expect(vector.get(index)).toEqual(index + 1)
 	})
 	it("get", () => {
 		const vector = new Vector([1, 2, 3])
-		for (let index = 0; index < vector.length; index++)
-			expect(vector.get(index)).toEqual(index + 1)
+		for (let index = 0; index < vector.length; index++) expect(vector.get(index)).toEqual(index + 1)
 	})
 })

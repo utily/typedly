@@ -10,9 +10,7 @@ export class IterableWeakSet<T extends WeakKey = any> {
 	}
 
 	constructor(iterable?: Iterable<T>) {
-		if (iterable)
-			for (const value of iterable)
-				this.add(value)
+		if (iterable) for (const value of iterable) this.add(value)
 	}
 
 	add(value: T): this {
@@ -30,8 +28,7 @@ export class IterableWeakSet<T extends WeakKey = any> {
 
 	delete(value: T): boolean {
 		const entry = this.#weakMap.get(value)
-		if (!entry)
-			return false
+		if (!entry) return false
 		this.#weakMap.delete(value)
 		this.#set.delete(entry.reference)
 		this.#finalization.unregister(entry.reference)
@@ -39,18 +36,15 @@ export class IterableWeakSet<T extends WeakKey = any> {
 	}
 
 	forEach(callback: (value: T) => void) {
-		for (const [value] of this)
-			callback(value)
+		for (const [value] of this) callback(value)
 	}
 
 	*[Symbol.iterator](): Generator<[T, T], void> {
 		for (const reference of this.#set) {
 			const value = reference.deref()
-			if (!value)
-				continue
+			if (!value) continue
 			const stored = this.#weakMap.get(value)
-			if (stored)
-				yield [value, value]
+			if (stored) yield [value, value]
 		}
 	}
 
@@ -59,8 +53,7 @@ export class IterableWeakSet<T extends WeakKey = any> {
 	}
 
 	*values(): Generator<T, void> {
-		for (const [value] of this)
-			yield value
+		for (const [value] of this) yield value
 	}
 }
 export namespace IterableWeakSet {}
